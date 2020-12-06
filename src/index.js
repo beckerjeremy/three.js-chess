@@ -40,7 +40,9 @@ const animate = function () {
 
     raycaster.setFromCamera( mouse, camera );
     const intersects = raycaster.intersectObjects( board.children );
-    
+
+    if( intersects.length > 0 ) console.log( board.getFieldByPosition( intersects[0].object.getFieldPosition() ) );
+
     renderer.render( scene, camera );
 }
 animate();
