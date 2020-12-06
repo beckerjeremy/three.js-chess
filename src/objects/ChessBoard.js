@@ -1,4 +1,5 @@
 import ChessField from './ChessField';
+import ChessUtils from './ChessUtils';
 
 const THREE = require("three-js")();
 
@@ -23,12 +24,11 @@ class ChessBoard extends THREE.Group {
     }
 
     getFieldByPosition( position ) {
-        let column = position.charCodeAt(0) - 65;
-        let row = parseInt( position[1] ) - 1;
+        let positionVector = ChessUtils.positionToVector2(position)
 
-        console.log(column, row)
+        console.log(positionVector.x, positionVector.y)
 
-        return this.children[ column * 8 + ( 7 - row ) ]
+        return this.children[ positionVector.x * 8 + ( 7 - positionVector.y ) ];
     }
 
 }
