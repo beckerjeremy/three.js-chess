@@ -2,11 +2,11 @@ const THREE = require("three-js")();
 
 class ChessField extends THREE.Mesh {
 
-    constructor( color, piece = null, fieldPosition = null ) {
+    constructor( color, piece = null, fenPosition = null ) {
         super( new THREE.BoxBufferGeometry( 1, .1, 1 ), new THREE.MeshPhongMaterial( { color: color } ) );
 
         this.piece = piece;
-        this.fieldPosition = fieldPosition;
+        this.fenPosition = fenPosition;
     }
 
     setPiece( piece ) {
@@ -17,12 +17,12 @@ class ChessField extends THREE.Mesh {
         return this.piece;
     }
 
-    setFieldPosition( fieldPosition ) {
-        this.fieldPosition = fieldPosition;
+    setFenPosition( fenPosition ) {
+        this.fenPosition = fenPosition;
     }
 
-    getFieldPosition() {
-        return this.fieldPosition;
+    getFenPosition() {
+        return this.fenPosition;
     }
 
 }

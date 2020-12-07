@@ -1,5 +1,6 @@
 import ChessBoard from './objects/ChessBoard';
 import ChessPawn from './objects/ChessPawn';
+import ChessKnight from './objects/ChessKnight';
 import DragControls from 'drag-controls';
 
 const THREE = require("three-js")(["OrbitControls", "OBJLoader"]);
@@ -27,21 +28,26 @@ scene.add( board );
 const pawn = new ChessPawn( 0xff0000 );
 scene.add( pawn );
 
-
 const pawn1 = new ChessPawn( 'white' );
 scene.add( pawn1 );
+
+const knight = new ChessKnight( 'white' );
+scene.add( knight );
 
 camera.position.z = 8;
 camera.position.y = 5;
 camera.rotation.x = -.4;
 
+board.getFieldByPosition('C3').piece = knight;
+knight.fenPosition = 'C3';
+knight.position.set( board.getFieldByPosition('C3').position.x, board.getFieldByPosition('C3').position.y, board.getFieldByPosition('C3').position.z );
 board.getFieldByPosition('B1').piece = pawn1;
-pawn1.fieldPosition = 'B1';
+pawn1.fenPosition = 'B1';
 pawn1.position.set( board.getFieldByPosition('B1').position.x, board.getFieldByPosition('B1').position.y, board.getFieldByPosition('B1').position.z );
 board.getFieldByPosition('A2').piece = pawn;
-pawn.fieldPosition = 'A2';
+pawn.fenPosition = 'A2';
 pawn.position.set( board.getFieldByPosition('A2').position.x, board.getFieldByPosition('A2').position.y, board.getFieldByPosition('A2').position.z );
-console.log( pawn.getPossibleMoves(board) )
+console.log( knight.getPossibleMoves(board) )
 
 // Controls
 const controls = new THREE.OrbitControls( camera, renderer.domElement );
@@ -64,7 +70,7 @@ const animate = function () {
     raycaster.setFromCamera( mouse, camera );
     const intersects = raycaster.intersectObjects( board.children );
 
-    //if( intersects.length > 0 ) console.log( board.getFieldByPosition( intersects[0].object.getFieldPosition() ) );
+    //if( intersects.length > 0 ) console.log( board.getFieldByPosition( intersects[0].object.getFenPosition() ) );
 
     renderer.render( scene, camera );
 }

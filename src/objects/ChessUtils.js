@@ -10,7 +10,7 @@ export default {
     },
 
     vector2ToPosition( vector ) {
-        return String.fromCharCode(65 + vector.x) + ( 8 - vector.y );
+        return String.fromCharCode( 65 + vector.x ) + ( 8 - vector.y );
     }
 
 }

@@ -5,15 +5,15 @@ const THREE = require("three-js")();
 
 class ChessPawn extends ChessPiece {
 
-    constructor( color, fieldPosition = null ) {
-        super( color, fieldPosition, new THREE.BoxBufferGeometry( .5, .5, .5 ) );
+    constructor( color, fenPosition = null ) {
+        super( color, fenPosition, new THREE.BoxBufferGeometry( .5, .5, .5 ) );
         
         this.hasMovedTwo = false;
     }
 
     getPossibleMoves( board ) {
         let moves = [];
-        let positionVector = ChessUtils.positionToVector2( this.fieldPosition );
+        let positionVector = ChessUtils.positionToVector2( this.fenPosition );
         let direction = this.color == 'white' ? 1 : -1;
 
         // Check default moves
