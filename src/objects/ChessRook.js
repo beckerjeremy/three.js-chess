@@ -19,7 +19,7 @@ class ChessRook extends ChessPiece {
             let xDirection = directions[i];
             let yDirection = directions[directions.length - 1 - i];
             for( let j = 1; j < 8; j++ ) {
-                let tempPosition = board.getFiledByPositionCoordinates( positionVector.x + j * xDirection, positionVector.y + j * yDirection );
+                let tempPosition = board.getFieldByPositionCoordinates( positionVector.x + j * xDirection, positionVector.y + j * yDirection );
                 if( tempPosition != null ) {
                     if( tempPosition.piece != null ) {
                         if( tempPosition.piece.color != this.color ) moves.push( tempPosition );
@@ -30,6 +30,8 @@ class ChessRook extends ChessPiece {
                 else break;
             }
         }
+
+        return moves;
     }
 
 }

@@ -18,7 +18,7 @@ class ChessBishop extends ChessPiece {
         let yDirections = [ -1, -1, 1, 1 ];
         for(let i = 0; i < 4; i ++) {
             for( let j = 1; j < 8; j++ ) {
-                let tempPosition = board.getFiledByPositionCoordinates( positionVector.x + j * xDirections[i], positionVector.y + j * yDirections[i] );
+                let tempPosition = board.getFieldByPositionCoordinates( positionVector.x + j * xDirections[i], positionVector.y + j * yDirections[i] );
                 if( tempPosition != null ) {
                     if( tempPosition.piece != null ) {
                         if( tempPosition.piece.color != this.color ) moves.push( tempPosition );
@@ -29,6 +29,8 @@ class ChessBishop extends ChessPiece {
                 else break;
             }
         }
+
+        return moves;
     }
 
 }

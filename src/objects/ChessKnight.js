@@ -21,7 +21,7 @@ class ChessKnight extends ChessPiece {
                 let xChange = digits[i];
                 let yChange = digits[j];
                 if( Math.abs( xChange ) != Math.abs( yChange ) ) {
-                    let tempPosition = board.getFiledByPositionCoordinates( positionVector.x + xChange, positionVector.y + yChange );
+                    let tempPosition = board.getFieldByPositionCoordinates( positionVector.x + xChange, positionVector.y + yChange );
                     if( tempPosition != null ) {
                         if( tempPosition.piece == null || tempPosition.piece.color != this.color ) moves.push( tempPosition );
                     }

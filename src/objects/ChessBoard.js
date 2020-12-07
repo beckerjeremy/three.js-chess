@@ -27,10 +27,10 @@ class ChessBoard extends THREE.Group {
     getFieldByPosition( position ) {
         let positionVector = ChessUtils.positionToVector2(position)
 
-        return this.getFiledByPositionCoordinates( positionVector.x, positionVector.y );
+        return this.getFieldByPositionCoordinates( positionVector.x, positionVector.y );
     }
 
-    getFiledByPositionCoordinates( x, y ) {
+    getFieldByPositionCoordinates( x, y ) {
         if ( x < 0 || x > 7 || y < 0 || y > 7 ) return null;
         return this.children[ x * 8 + ( 7 - y ) ];
     }
