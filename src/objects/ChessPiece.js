@@ -2,16 +2,18 @@ const THREE = require("three-js")();
 
 class ChessPiece extends THREE.Mesh {
 
-    constructor( type, color, position = null ) {
-        super();
+    constructor( color, fieldPosition = null, geometry ) {
+        super( geometry, new THREE.MeshPhongMaterial( { color: color } ) );
 
-        this.type = type;
         this.color = color;
-        this.position = position;
+        this.fieldPosition = fieldPosition; 
     }
 
-    canMove( from, to ) {
-        return true;
+    // Retrun the fields a piece can move to
+    possibleMoves( board ) {
+
     }
 
 }
+
+export default ChessPiece;

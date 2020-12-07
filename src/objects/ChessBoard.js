@@ -15,8 +15,9 @@ class ChessBoard extends THREE.Group {
         for( let i = 0; i < 8; i++ )
             for( let j = 0; j < 8; j++ ) {
                 let newField = null;
-                if( ( i + j ) % 2 == 0 ) newField =  new ChessField( 0xffffff, null, String.fromCharCode(65 + i) + ( 8 - j ) );
-                else newField = new ChessField( 0x000000, null, String.fromCharCode(65 + i) + ( 8 - j ) );
+                let vector = new THREE.Vector2( i, j );
+                if( ( i + j ) % 2 == 0 ) newField =  new ChessField( 0xffffff, null, ChessUtils.vector2ToPosition( vector ) );
+                else newField = new ChessField( 0x000000, null, ChessUtils.vector2ToPosition( vector ) );
 
                 newField.position.set( i, 0, j );
                 this.add( newField );
@@ -25,8 +26,6 @@ class ChessBoard extends THREE.Group {
 
     getFieldByPosition( position ) {
         let positionVector = ChessUtils.positionToVector2(position)
-
-        console.log(positionVector.x, positionVector.y)
 
         return this.children[ positionVector.x * 8 + ( 7 - positionVector.y ) ];
     }

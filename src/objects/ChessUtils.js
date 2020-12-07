@@ -7,6 +7,10 @@ export default {
         let row = parseInt( position[1] ) - 1;
 
         return new THREE.Vector2( column, row );
+    },
+
+    vector2ToPosition( vector ) {
+        return String.fromCharCode(65 + vector.x) + ( 8 - vector.y );
     }
 
 }
