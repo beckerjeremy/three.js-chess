@@ -7,10 +7,11 @@ class ChessPiece extends THREE.Mesh {
 
         this.color = color;
         this.fieldPosition = fieldPosition; 
+        this.hasMoved = false;
     }
 
     // Retrun the fields a piece can move to
-    possibleMoves( board ) {
+    getPossibleMoves( board ) {
 
     }
 

@@ -27,11 +27,21 @@ scene.add( board );
 const pawn = new ChessPawn( 0xff0000 );
 scene.add( pawn );
 
+
+const pawn1 = new ChessPawn( 'white' );
+scene.add( pawn1 );
+
 camera.position.z = 8;
 camera.position.y = 5;
 camera.rotation.x = -.4;
 
-board.getFieldByPosition('A1').piece = pawn;
+board.getFieldByPosition('B1').piece = pawn1;
+pawn1.fieldPosition = 'B1';
+pawn1.position.set( board.getFieldByPosition('B1').position.x, board.getFieldByPosition('B1').position.y, board.getFieldByPosition('B1').position.z );
+board.getFieldByPosition('A2').piece = pawn;
+pawn.fieldPosition = 'A2';
+pawn.position.set( board.getFieldByPosition('A2').position.x, board.getFieldByPosition('A2').position.y, board.getFieldByPosition('A2').position.z );
+console.log( pawn.getPossibleMoves(board) )
 
 // Controls
 const controls = new THREE.OrbitControls( camera, renderer.domElement );
