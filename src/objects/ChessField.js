@@ -4,6 +4,8 @@ class ChessField extends THREE.Mesh {
 
     constructor( color, piece = null, fenPosition = null ) {
         super( new THREE.BoxBufferGeometry( 1, .1, 1 ), new THREE.MeshPhongMaterial( { color: color } ) );
+        this.castShadow = true;
+        this.receiveShadow = true;
 
         this.piece = piece;
         this.fenPosition = fenPosition;

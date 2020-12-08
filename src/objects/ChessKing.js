@@ -6,7 +6,7 @@ const THREE = require("three-js")();
 class ChessKing extends ChessPiece {
 
     constructor( color, fenPosition = null ) {
-        super( color, fenPosition, new THREE.BoxBufferGeometry( .3, .8, .3 ) );
+        super( color, fenPosition, new THREE.BoxBufferGeometry( .7, 1.2, .7 ) );
 
         this.isChecked = false;
     }
@@ -34,7 +34,7 @@ class ChessKing extends ChessPiece {
 
             // Check left side
             let castleLeft = true;
-            if( leftRook != null && leftRook.color == this.color && leftRook.hasMoved == false ) {
+            if( leftRook != null && leftRook.color == this.color && leftRook.canCastle == true ) {
                 for( let i = 0; i < Math.abs( this.positionVector.y - 1 ); i++ ) {
                     let tempPosition = board.getFieldByPositionCoordinates( positionVector.x, positionVector.y - i );
                     if( tempPosition.piece != null ) {
@@ -48,7 +48,7 @@ class ChessKing extends ChessPiece {
 
             // Check right side
             let castleRight = true;
-            if( rightRook != null && rightRook.color == this.color && rightRook.hasMoved == false ) {
+            if( rightRook != null && rightRook.color == this.color && rightRook.canCastle == true ) {
                 for( let i = 0; i < Math.abs( this.positionVector.y - 6 ); i++ ) {
                     let tempPosition = board.getFieldByPositionCoordinates( positionVector.x, positionVector.y + i );
                     if( tempPosition.piece != null ) {

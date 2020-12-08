@@ -8,6 +8,7 @@ class ChessRook extends ChessPiece {
     constructor( color, fenPosition = null ) {
         super( color, fenPosition, new THREE.BoxBufferGeometry( .5, 2, .5 ) );
 
+        let canCastle = true;
     }
 
     getPossibleMoves( board ) {

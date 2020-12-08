@@ -6,7 +6,7 @@ const THREE = require("three-js")();
 class ChessQueen extends ChessPiece {
 
     constructor( color, fenPosition = null ) {
-        super( color, fenPosition, new THREE.BoxBufferGeometry( .3, .8, .3 ) );
+        super( color, fenPosition, new THREE.BoxBufferGeometry( .5, 1.1, .5 ) );
 
     }
 
