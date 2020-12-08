@@ -14,8 +14,11 @@ class ChessBoard extends THREE.Group {
 
     constructor() {
         super();
-        this.generateBoard();
+
         this.pieces = [];
+        this.fields = [];
+
+        this.generateBoard();
     }
 
     generateBoard() {
@@ -26,9 +29,10 @@ class ChessBoard extends THREE.Group {
                 let newField = null;
                 let vector = new THREE.Vector2( i, j );
                 if( ( i + j ) % 2 == 0 ) newField =  new ChessField( 0xd9bb96, null, ChessUtils.vector2ToPosition( vector ) );
-                else newField = new ChessField( 0x8a622f, null, ChessUtils.vector2ToPosition( vector ) );
+                else newField = new ChessField( 0x497a46, null, ChessUtils.vector2ToPosition( vector ) );
 
                 newField.position.set( i, 0, j );
+                this.fields.push( newField );
                 this.add( newField );
             }
     }
@@ -44,6 +48,7 @@ class ChessBoard extends THREE.Group {
 
     placePieces( position ) {
         let positionRows = position.split('/');
+        positionRows.reverse();
 
         for( let i = 0; i < positionRows.length; i++ ) {
             let positions = positionRows[i].split('');
@@ -54,14 +59,14 @@ class ChessBoard extends THREE.Group {
                 if( parseInt( currentPosition ) > 0 ) {
                     emptyFields += parseInt( currentPosition ) - 1;
                 } else {
-                    this.placePiece( new THREE.Vector2( j + emptyFields, 7 - i ), currentPosition );
+                    this.placeNewPiece( new THREE.Vector2( j + emptyFields, i ), currentPosition );
                 }
             }
             emptyFields = 0;
         }
     }
 
-    placePiece( position, pieceChar ) {
+    placeNewPiece( position, pieceChar ) {
         let charCode = pieceChar.charCodeAt(0);
         let piece;
         switch( charCode ) {
@@ -81,6 +86,10 @@ class ChessBoard extends THREE.Group {
 
         this.pieces.push( piece );
         this.add( piece );
+        this.placePiece( position, piece );
+    }
+
+    placePiece( position, piece ) {
         let field = this.getFieldByPositionCoordinates( position.x, position.y );
         field.piece = piece;
         piece.position.set( field.position.x, field.position.y, field.position.z );
@@ -95,6 +104,14 @@ class ChessBoard extends THREE.Group {
     getFieldByPositionCoordinates( x, y ) {
         if ( x < 0 || x > 7 || y < 0 || y > 7 ) return null;
         return this.children[ x * 8 + ( 7 - y ) ];
+    }
+
+    getPieces() {
+        return this.pieces;
+    }
+
+    getFields() {
+        return this.fields;
     }
 
 }

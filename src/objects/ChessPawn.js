@@ -21,8 +21,9 @@ class ChessPawn extends ChessPiece {
         if( move != null && move.piece == null ) {
             moves.push( move );
             let doubleMove = board.getFieldByPositionCoordinates( positionVector.x, positionVector.y + 2 * direction );
-            if( doubleMove != null && doubleMove.piece == null )
-                moves.push( doubleMove );
+            if( doubleMove != null && doubleMove.piece == null ) {
+                if( this.color == 'white' && positionVector.y == 1 || this.color == 'black' && positionVector.y == 6) moves.push( doubleMove );
+            }
         }
         
         // Check take moves for left and right diagonal field
