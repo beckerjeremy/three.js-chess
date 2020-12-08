@@ -14,7 +14,7 @@ class ChessPawn extends ChessPiece {
     getPossibleMoves( board ) {
         let moves = [];
         let positionVector = ChessUtils.positionToVector2( this.fenPosition );
-        let direction = this.color == 'white' ? 1 : -1;
+        let direction = this.color == 'white' ? -1 : 1;
 
         // Check default moves
         let move = board.getFieldByPositionCoordinates( positionVector.x, positionVector.y + direction )
@@ -22,7 +22,7 @@ class ChessPawn extends ChessPiece {
             moves.push( move );
             let doubleMove = board.getFieldByPositionCoordinates( positionVector.x, positionVector.y + 2 * direction );
             if( doubleMove != null && doubleMove.piece == null )
-                if( this.color == 'white' && positionVector.y == 1 || this.color == 'black' && positionVector.y == 6) moves.push( doubleMove );
+                if( this.color == 'white' && positionVector.y == 6 || this.color == 'black' && positionVector.y == 1) moves.push( doubleMove );
         }
         
         // Check take moves for left and right diagonal field

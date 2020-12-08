@@ -18,12 +18,10 @@ class ChessKing extends ChessPiece {
         // Check normal moves
         for(let i = -1; i < 2; i++ ) {
             for(let j = -1; j < 2; j++) {
-                if( i == 0 && j == 0 ) {
-                    let tempPosition = board.getFieldByPositionCoordinates( positionVector.x + i, positionVector.y + j );
-                    if( tempPosition != null )
-                        if( tempPosition.piece == null ) moves.push( tempPosition );
-                        else if( tempPosition.piece.color != this.color ) moves.push( tempPosition );
-                }
+                let tempPosition = board.getFieldByPositionCoordinates( positionVector.x + i, positionVector.y + j );
+                if( tempPosition != null )
+                    if( tempPosition.piece == null ) moves.push( tempPosition );
+                    else if( tempPosition.piece.color != this.color ) moves.push( tempPosition );
             }
         }
 

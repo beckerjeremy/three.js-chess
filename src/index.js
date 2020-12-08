@@ -48,9 +48,15 @@ let controls = new OrbitControls( camera, renderer.domElement );
 board.setUp( 'rn2k1r1/ppp1pp1p/3p2p1/5bn1/P7/2N2B2/1PPPPP2/2BNK1RR w Gkq - 4 11' );
 const moveControls = new PieceMoveControls( camera, renderer.domElement, board );
 moveControls.addEventListener( 'dragstart', function () { controls.enabled = false; } );
-moveControls.addEventListener( 'dragend', function () {  controls.enabled = true; } );
+moveControls.addEventListener( 'dragend', function ( event ) {
+    if(event.position) {
+        board.getFieldByPosition( event.object.fenPosition ).piece = null;
+        board.placePiece( event.position, event.object );
+    } 
+    controls.enabled = true; 
+} );
 
-
+console.log( board.getFieldByPositionCoordinates( 0, 0 ) );
 
 // Renders
 const animate = function () {

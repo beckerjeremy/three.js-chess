@@ -48,7 +48,6 @@ class ChessBoard extends THREE.Group {
 
     placePieces( position ) {
         let positionRows = position.split('/');
-        positionRows.reverse();
 
         for( let i = 0; i < positionRows.length; i++ ) {
             let positions = positionRows[i].split('');
@@ -92,6 +91,7 @@ class ChessBoard extends THREE.Group {
     placePiece( position, piece ) {
         let field = this.getFieldByPositionCoordinates( position.x, position.y );
         field.piece = piece;
+        piece.fenPosition = ChessUtils.vector2ToPosition( position );
         piece.position.set( field.position.x, field.position.y, field.position.z );
     }
 
@@ -103,7 +103,7 @@ class ChessBoard extends THREE.Group {
 
     getFieldByPositionCoordinates( x, y ) {
         if ( x < 0 || x > 7 || y < 0 || y > 7 ) return null;
-        return this.children[ x * 8 + ( 7 - y ) ];
+        return this.children[ x * 8 + ( y ) ];
     }
 
     getPieces() {

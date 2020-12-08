@@ -1,3 +1,5 @@
+import ChessUtil from './objects/ChessUtils';
+
 import * as THREE from 'three';
 
 class PieceMoveControls extends THREE.EventDispatcher {
@@ -22,7 +24,6 @@ class PieceMoveControls extends THREE.EventDispatcher {
     onMouseDown( event ) {
         this.mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
         this.mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-
         this.raycaster.setFromCamera( this.mouse, this.camera );
         let intersects = this.raycaster.intersectObjects( this.board.getPieces() );
 
@@ -45,12 +46,26 @@ class PieceMoveControls extends THREE.EventDispatcher {
     }
 
     onMouseUp( event ) {
+        this.mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+        this.mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+        this.raycaster.setFromCamera( this.mouse, this.camera );
+        let intersects = this.raycaster.intersectObjects( this.selectedFields );
+
+        let field = null;
+
+        if( intersects.length > 0 ) {
+            field = intersects[0].object;
+
+            console.log( field )
+        }
+
         for( let i = 0; i < this.selectedFields.length; i++ ) {
             let field = this.selectedFields[i];
             field.material = this.replacedMaterials[i];
         }
 
-        if( this.selectedPiece ) this.dispatchEvent( { type: "dragend", object: this.selectedPiece } );
+        if( this.selectedPiece && field ) this.dispatchEvent( { type: "dragend", object: this.selectedPiece, position: ChessUtil.positionToVector2( field.fenPosition ) } );
+        else if ( this.selectedPiece ) this.dispatchEvent( { type: "dragend", object: this.selectedPiece } );
 
         this.selectedPiece = null;
         this.replacedMaterials = [];
