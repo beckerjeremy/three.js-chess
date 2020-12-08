@@ -2,7 +2,9 @@ import ChessBoard from './objects/ChessBoard';
 import ChessUtils from './objects/ChessUtils';
 import PieceMoveControls from './PieceMoveControls';
 
-const THREE = require("three-js")(["OrbitControls", "OBJLoader"]);
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+//const THREE = require("three-js")(["OrbitControls", "OBJLoader"]);
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color( 0x362a24 );
@@ -38,11 +40,17 @@ camera.position.z = 8;
 camera.position.y = 5;
 camera.rotation.x = -.4;
 
-const controls = new THREE.OrbitControls( camera, renderer.domElement );
+window.addEventListener( 'mousedown', ( e ) => { console.log('test') }, false );
+
+let controls = new OrbitControls( camera, renderer.domElement );
 
 //board.setUp( 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1' );
 board.setUp( 'rn2k1r1/ppp1pp1p/3p2p1/5bn1/P7/2N2B2/1PPPPP2/2BNK1RR w Gkq - 4 11' );
-const moveControls = new PieceMoveControls( camera, board );
+const moveControls = new PieceMoveControls( camera, renderer.domElement, board );
+moveControls.addEventListener( 'dragstart', function () { controls.enabled = false; } );
+moveControls.addEventListener( 'dragend', function () {  controls.enabled = true; } );
+
+
 
 // Renders
 const animate = function () {
@@ -51,5 +59,3 @@ const animate = function () {
     renderer.render( scene, camera );
 }
 animate();
-
-console.log( ChessUtils.vector2ToPosition( new THREE.Vector2(0, 0)) )

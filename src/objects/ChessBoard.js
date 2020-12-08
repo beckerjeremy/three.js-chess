@@ -8,7 +8,7 @@ import ChessRook from './ChessRook';
 import ChessQueen from './ChessQueen';
 import ChessKing from './ChessKing';
 
-const THREE = require("three-js")();
+import * as THREE from 'three';
 
 class ChessBoard extends THREE.Group {
 

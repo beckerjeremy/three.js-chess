@@ -1,4 +1,4 @@
-const THREE = require("three-js")();
+import * as THREE from 'three';
 
 export default {
 

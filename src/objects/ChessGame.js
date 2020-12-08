@@ -1,4 +1,4 @@
-import ChessBoard from './ChessBoard';
+import * as THREE from 'three';
 
 class ChessGame {
 

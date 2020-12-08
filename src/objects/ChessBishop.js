@@ -1,7 +1,7 @@
 import ChessPiece from './ChessPiece';
 import ChessUtils from './ChessUtils';
 
-const THREE = require("three-js")();
+import * as THREE from 'three';
 
 class ChessBishop extends ChessPiece {
 
