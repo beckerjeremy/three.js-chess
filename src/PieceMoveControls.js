@@ -12,6 +12,7 @@ class PieceMoveControls extends THREE.EventDispatcher {
         this.selectedFields = [];
         this.replacedMaterials = [];
         this.selectedPiece = null;
+        this.startPosition = null;
 
         this.raycaster = new THREE.Raycaster();
 
@@ -29,6 +30,7 @@ class PieceMoveControls extends THREE.EventDispatcher {
 
         if( intersects.length > 0 ) {
             this.selectedPiece = intersects[0].object;
+            this.startPosition = this.selectedPiece.fenPosition;
             let fields = intersects[0].object.getPossibleMoves( this.board );
 
             for( let i = 0; i < fields.length; i++ ) {
@@ -55,8 +57,6 @@ class PieceMoveControls extends THREE.EventDispatcher {
 
         if( intersects.length > 0 ) {
             field = intersects[0].object;
-
-            console.log( field )
         }
 
         for( let i = 0; i < this.selectedFields.length; i++ ) {
@@ -64,10 +64,11 @@ class PieceMoveControls extends THREE.EventDispatcher {
             field.material = this.replacedMaterials[i];
         }
 
-        if( this.selectedPiece && field ) this.dispatchEvent( { type: "dragend", object: this.selectedPiece, position: ChessUtil.positionToVector2( field.fenPosition ) } );
+        if( this.selectedPiece && field ) this.dispatchEvent( { type: "dragend", object: this.selectedPiece, position: ChessUtil.positionToVector2( field.fenPosition ), startPosition: this.startPosition } );
         else if ( this.selectedPiece ) this.dispatchEvent( { type: "dragend", object: this.selectedPiece } );
 
         this.selectedPiece = null;
+        this.startPosition = null;
         this.replacedMaterials = [];
         this.selectedFields = [];
     }

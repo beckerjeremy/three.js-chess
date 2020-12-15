@@ -89,10 +89,20 @@ class ChessBoard extends THREE.Group {
     }
 
     placePiece( position, piece ) {
+        this.removePieceAtPosition( position );
         let field = this.getFieldByPositionCoordinates( position.x, position.y );
         field.piece = piece;
         piece.fenPosition = ChessUtils.vector2ToPosition( position );
         piece.position.set( field.position.x, field.position.y, field.position.z );
+    }
+
+    removePieceAtPosition( position ) {
+        let field = this.getFieldByPositionCoordinates( position.x, position.y );
+        if( field.piece ) {
+            this.pieces.splice( this.pieces.indexOf( field.piece ), 1 );
+            this.remove( field.piece );
+            field.piece = null;
+        }
     }
 
     getFieldByPosition( position ) {

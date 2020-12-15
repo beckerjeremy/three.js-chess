@@ -40,8 +40,6 @@ camera.position.z = 8;
 camera.position.y = 5;
 camera.rotation.x = -.4;
 
-window.addEventListener( 'mousedown', ( e ) => { console.log('test') }, false );
-
 let controls = new OrbitControls( camera, renderer.domElement );
 
 //board.setUp( 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1' );
@@ -50,13 +48,11 @@ const moveControls = new PieceMoveControls( camera, renderer.domElement, board )
 moveControls.addEventListener( 'dragstart', function () { controls.enabled = false; } );
 moveControls.addEventListener( 'dragend', function ( event ) {
     if(event.position) {
-        board.getFieldByPosition( event.object.fenPosition ).piece = null;
         board.placePiece( event.position, event.object );
+        board.getFieldByPosition( event.startPosition ).piece = null;
     } 
     controls.enabled = true; 
 } );
-
-console.log( board.getFieldByPositionCoordinates( 0, 0 ) );
 
 // Renders
 const animate = function () {
